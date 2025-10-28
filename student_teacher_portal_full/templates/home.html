@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block title %}Home - Student-Teacher Portal{% endblock %}
+{% block content %}
+  <div style="text-align:center;">
+    <h1 style="color:var(--primary);font-size:2.5em;">Welcome to the Student-Teacher Portal</h1>
+    <p style="font-size:1.2em;">A modern platform for managing students, teachers, and test results.</p>
+    <div style="margin-top:2em;">
+      {% if not session.get('role') %}
+        <a href="{{ url_for('login') }}" class="stats-card" style="display:inline-block;">Login</a>
+        <a href="{{ url_for('register_teacher') }}" class="stats-card" style="display:inline-block;">Teacher Signup</a>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

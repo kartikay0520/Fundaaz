@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="card">
+  <h2>Teacher Signup</h2>
+  <form method="POST">
+    <label>Name:</label><br>
+    <input type="text" name="name" required><br><br>
+    <label>Password:</label><br>
+    <input type="password" name="password" required><br><br>
+    <label>Special Key:</label><br>
+    <input type="text" name="key" placeholder="Enter Teacher Key" required><br><br>
+    <button type="submit" class="btn">Register</button>
+  </form>
+</div>
+{% endblock %}

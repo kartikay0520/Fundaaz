@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+  <h2 style="color:var(--primary);">Login</h2>
+  <form method="post">
+    <label for="role">Role</label>
+    <select name="role" id="role" required>
+      <option value="student">Student</option>
+      <option value="teacher">Teacher</option>
+    </select>
+    <label for="name">Username</label>
+    <input type="text" name="name" id="name" required>
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" required>
+    <div id="teacher-key" style="display:none;">
+      <label for="key">Teacher Key</label>
+      <input type="text" name="key" id="key">
+    </div>
+    <button type="submit">Login</button>
+  </form>
+  <script>
+    document.getElementById('role').addEventListener('change', function() {
+      document.getElementById('teacher-key').style.display = this.value === 'teacher' ? 'block' : 'none';
+    });
+  </script>
+{% endblock %}

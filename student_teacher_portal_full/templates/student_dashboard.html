@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block title %}Student Dashboard{% endblock %}
+{% block content %}
+  <h2 style="color:var(--primary);">Welcome, {{ name }}</h2>
+  <div class="stats-cards">
+    <div class="stats-card">
+      <h2>{{ info['class'] }}</h2>
+      <span>Class</span>
+    </div>
+    <div class="stats-card">
+      <h2>{{ total_tests }}</h2>
+      <span>Tests Taken</span>
+    </div>
+    <div class="stats-card">
+      <h2>{{ avg_percentage }}%</h2>
+      <span>Avg. Percentage</span>
+    </div>
+  </div>
+
+  <button id="showGraphBtn" style="background:var(--secondary);color:#fff;padding:0.7em 1.2em;border:none;border-radius:8px;font-weight:600;cursor:pointer;margin-bottom:1em;">Show Graph</button>
+
+  <!-- Modal -->
+  <div id="graphModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.3);z-index:1000;align-items:center;justify-content:center;">
+    <div style="background:#fff;padding:2em;border-radius:18px;max-width:400px;width:90%;margin:auto;position:relative;">
+      <span id="closeModal" style="position:absolute;top:10px;right:18px;cursor:pointer;font-size:1.5em;">&times;</span>
+      <h3>Your Progress Graph</h3>
+      <form id="graphForm">
+        <input type="hidden" id="studentSelect" name="student" value="{{ name }}">
+        <label for="startDate">Start Date</label>
+        <input type="date" id="startDate" name="start_date" required>
+        <label for="endDate">End Date</label>
+        <input type="date" id="endDate" name="end_date" required>
+        <button type="submit" style="margin-top:1em;">Show</button>
+      </form>
+      <canvas id="progressChart" style="margin-top:1em;max-width:100%;"></canvas>
+    </div>
+  </div>
+
+  <h3>Your Test Results</h3>
+  <table class="table-gradient">
+    <tr>
+      <th>Subject</th><th>Test No.</th><th>Marks</th><th>Total</th><th>%</th><th>Date</th>
+    </tr>
+    {% for t in tests %}
+      <tr>
+        <td>{{ t['subject'] }}</td>
+        <td>{{ t['test_no'] }}</td>
+        <td>{{ t['marks'] }}</td>
+        <td>{{ t['total_marks'] }}</td>
+        <td>{{ t['percentage'] }}%</td>
+        <td>{{ t['date'] }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+  <h3>Your Contact Info</h3>
+  <table class="table-gradient">
+    <tr><th>Phone 1</th><td>{{ info['phone1'] }}</td></tr>
+    <tr><th>Phone 2</th><td>{{ info['phone2'] }}</td></tr>
+    <tr><th>Phone 3</th><td>{{ info['phone3'] }}</td></tr>
+  </table>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+{% endblock %}
